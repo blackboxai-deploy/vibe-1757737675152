@@ -1,0 +1,520 @@
+/* CSS Variables for customization */
+:root {
+  --sunflower-yellow: #FFD700;
+  --sunflower-orange: #FFA500;
+  --sunflower-brown: #8B4513;
+  --leaf-green: #228B22;
+  --stem-green: #32CD32;
+  --dark-green: #006400;
+  --soil-brown: #4A4A4A;
+}
+
+/* Container */
+.sunflower-container {
+  position: relative;
+  width: 400px;
+  height: 500px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  transform-origin: center bottom;
+}
+
+/* Ambient particles */
+.particle {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(255, 215, 0, 0.3);
+  border-radius: 50%;
+  animation: float 8s infinite ease-in-out;
+}
+
+.particle-1 { 
+  top: 10%; 
+  left: 15%; 
+  animation-delay: 0s; 
+}
+
+.particle-2 { 
+  top: 20%; 
+  right: 20%; 
+  animation-delay: 1.5s; 
+}
+
+.particle-3 { 
+  top: 60%; 
+  left: 10%; 
+  animation-delay: 3s; 
+}
+
+.particle-4 { 
+  top: 40%; 
+  right: 15%; 
+  animation-delay: 4.5s; 
+}
+
+.particle-5 { 
+  top: 80%; 
+  left: 80%; 
+  animation-delay: 6s; 
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0; }
+  25% { transform: translateY(-20px) translateX(5px); opacity: 0.5; }
+  50% { transform: translateY(-10px) translateX(-5px); opacity: 1; }
+  75% { transform: translateY(-30px) translateX(3px); opacity: 0.7; }
+}
+
+/* Soil */
+.soil {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 20px;
+  background: var(--soil-brown);
+  border-radius: 50px;
+  opacity: 0.8;
+}
+
+/* Seed */
+.seed {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: var(--sunflower-brown);
+  border-radius: 50%;
+  opacity: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.seed.visible {
+  opacity: 1;
+  animation: seedPulse 2s ease-in-out infinite;
+}
+
+@keyframes seedPulse {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.1); }
+}
+
+/* Stem */
+.stem {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
+
+.stem-segment {
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(to top, var(--dark-green), var(--stem-green));
+  border-radius: 4px;
+  transform-origin: center bottom;
+  transform: scaleY(0);
+  transition: all 0.8s ease-out;
+}
+
+.stem.growing .stem-segment {
+  transform: scaleY(1);
+}
+
+.stem.growing .segment-1 { transition-delay: 0s; }
+.stem.growing .segment-2 { transition-delay: 0.3s; }
+.stem.growing .segment-3 { transition-delay: 0.6s; }
+.stem.growing .segment-4 { transition-delay: 0.9s; }
+.stem.growing .segment-5 { transition-delay: 1.2s; }
+
+/* Leaves */
+.leaves {
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.leaf {
+  position: absolute;
+  width: 30px;
+  height: 60px;
+  background: linear-gradient(45deg, var(--dark-green), var(--leaf-green));
+  border-radius: 50% 10% 50% 80%;
+  transform-origin: center bottom;
+  opacity: 0;
+  transition: all 1s ease-out;
+}
+
+.leaf-left-1 {
+  left: -40px;
+  bottom: 20px;
+  transform: rotate(-30deg) scale(0);
+}
+
+.leaf-right-1 {
+  right: -40px;
+  bottom: 20px;
+  transform: rotate(30deg) scale(0);
+}
+
+.leaf-left-2 {
+  left: -35px;
+  bottom: 60px;
+  transform: rotate(-45deg) scale(0);
+}
+
+.leaf-right-2 {
+  right: -35px;
+  bottom: 60px;
+  transform: rotate(45deg) scale(0);
+}
+
+.leaves.sprouting .leaf {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.leaves.sprouting .leaf-left-1 { 
+  transform: rotate(-30deg) scale(1); 
+  transition-delay: 0s; 
+}
+
+.leaves.sprouting .leaf-right-1 { 
+  transform: rotate(30deg) scale(1); 
+  transition-delay: 0.2s; 
+}
+
+.leaves.sprouting .leaf-left-2 { 
+  transform: rotate(-45deg) scale(1); 
+  transition-delay: 0.4s; 
+}
+
+.leaves.sprouting .leaf-right-2 { 
+  transform: rotate(45deg) scale(1); 
+  transition-delay: 0.6s; 
+}
+
+/* Bud */
+.bud {
+  position: absolute;
+  bottom: 220px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(45deg, var(--dark-green), var(--sunflower-brown));
+  border-radius: 50%;
+  opacity: 0;
+  transform-origin: center bottom;
+  transition: all 1s ease-out;
+}
+
+.bud.forming {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+  animation: budGrow 2s ease-out;
+}
+
+@keyframes budGrow {
+  0% { transform: translateX(-50%) scale(0); }
+  70% { transform: translateX(-50%) scale(1.1); }
+  100% { transform: translateX(-50%) scale(1); }
+}
+
+/* Petals */
+.petals {
+  position: absolute;
+  bottom: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 120px;
+}
+
+.petal {
+  position: absolute;
+  width: 20px;
+  height: 40px;
+  background: linear-gradient(to top, var(--sunflower-orange), var(--sunflower-yellow));
+  border-radius: 50% 50% 50% 50%;
+  transform-origin: center bottom;
+  left: 50%;
+  top: 50%;
+  opacity: 0;
+  transition: all 1.2s ease-out;
+  transform: translateX(-50%) translateY(-50%) scale(0);
+}
+
+.petals.blooming .petal {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-50%) scale(1);
+}
+
+/* Individual petal rotations */
+.petal-1 { 
+  transform: translateX(-50%) translateY(-50%) rotate(0deg) scale(0);
+  transition-delay: 0s; 
+}
+
+.petal-2 { 
+  transform: translateX(-50%) translateY(-50%) rotate(28deg) scale(0);
+  transition-delay: 0.1s; 
+}
+
+.petal-3 { 
+  transform: translateX(-50%) translateY(-50%) rotate(56deg) scale(0);
+  transition-delay: 0.2s; 
+}
+
+.petal-4 { 
+  transform: translateX(-50%) translateY(-50%) rotate(84deg) scale(0);
+  transition-delay: 0.3s; 
+}
+
+.petal-5 { 
+  transform: translateX(-50%) translateY(-50%) rotate(112deg) scale(0);
+  transition-delay: 0.4s; 
+}
+
+.petal-6 { 
+  transform: translateX(-50%) translateY(-50%) rotate(140deg) scale(0);
+  transition-delay: 0.5s; 
+}
+
+.petal-7 { 
+  transform: translateX(-50%) translateY(-50%) rotate(168deg) scale(0);
+  transition-delay: 0.6s; 
+}
+
+.petal-8 { 
+  transform: translateX(-50%) translateY(-50%) rotate(196deg) scale(0);
+  transition-delay: 0.7s; 
+}
+
+.petal-9 { 
+  transform: translateX(-50%) translateY(-50%) rotate(224deg) scale(0);
+  transition-delay: 0.8s; 
+}
+
+.petal-10 { 
+  transform: translateX(-50%) translateY(-50%) rotate(252deg) scale(0);
+  transition-delay: 0.9s; 
+}
+
+.petal-11 { 
+  transform: translateX(-50%) translateY(-50%) rotate(280deg) scale(0);
+  transition-delay: 1s; 
+}
+
+.petal-12 { 
+  transform: translateX(-50%) translateY(-50%) rotate(308deg) scale(0);
+  transition-delay: 1.1s; 
+}
+
+.petal-13 { 
+  transform: translateX(-50%) translateY(-50%) rotate(336deg) scale(0);
+  transition-delay: 1.2s; 
+}
+
+.petals.blooming .petal-1 { 
+  transform: translateX(-50%) translateY(-50%) rotate(0deg) scale(1);
+}
+
+.petals.blooming .petal-2 { 
+  transform: translateX(-50%) translateY(-50%) rotate(28deg) scale(1);
+}
+
+.petals.blooming .petal-3 { 
+  transform: translateX(-50%) translateY(-50%) rotate(56deg) scale(1);
+}
+
+.petals.blooming .petal-4 { 
+  transform: translateX(-50%) translateY(-50%) rotate(84deg) scale(1);
+}
+
+.petals.blooming .petal-5 { 
+  transform: translateX(-50%) translateY(-50%) rotate(112deg) scale(1);
+}
+
+.petals.blooming .petal-6 { 
+  transform: translateX(-50%) translateY(-50%) rotate(140deg) scale(1);
+}
+
+.petals.blooming .petal-7 { 
+  transform: translateX(-50%) translateY(-50%) rotate(168deg) scale(1);
+}
+
+.petals.blooming .petal-8 { 
+  transform: translateX(-50%) translateY(-50%) rotate(196deg) scale(1);
+}
+
+.petals.blooming .petal-9 { 
+  transform: translateX(-50%) translateY(-50%) rotate(224deg) scale(1);
+}
+
+.petals.blooming .petal-10 { 
+  transform: translateX(-50%) translateY(-50%) rotate(252deg) scale(1);
+}
+
+.petals.blooming .petal-11 { 
+  transform: translateX(-50%) translateY(-50%) rotate(280deg) scale(1);
+}
+
+.petals.blooming .petal-12 { 
+  transform: translateX(-50%) translateY(-50%) rotate(308deg) scale(1);
+}
+
+.petals.blooming .petal-13 { 
+  transform: translateX(-50%) translateY(-50%) rotate(336deg) scale(1);
+}
+
+/* Flower Center */
+.flower-center {
+  position: absolute;
+  bottom: 220px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  opacity: 0;
+  transition: all 1s ease-out;
+}
+
+.center-core {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, var(--sunflower-brown), #654321);
+  border-radius: 50%;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.flower-center.complete {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+
+.flower-center.complete .center-core {
+  animation: centerPulse 3s ease-in-out infinite;
+}
+
+@keyframes centerPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* Spiral Pattern */
+.spiral-pattern {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.spiral-dot {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(139, 69, 19, 0.8);
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform-origin: center;
+  opacity: 0;
+  transition: all 0.5s ease-out;
+}
+
+.flower-center.complete .spiral-dot {
+  opacity: 1;
+}
+
+/* Sunflower Glow */
+.sunflower-glow {
+  position: absolute;
+  bottom: 160px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.1), transparent 70%);
+  opacity: 0;
+  transition: all 2s ease-out;
+  pointer-events: none;
+}
+
+.sunflower-glow.glowing {
+  opacity: 1;
+  animation: gentleGlow 4s ease-in-out infinite;
+}
+
+@keyframes gentleGlow {
+  0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+  50% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sunflower-container {
+    width: 300px;
+    height: 400px;
+  }
+  
+  .petals {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .petal {
+    width: 16px;
+    height: 32px;
+  }
+  
+  .flower-center {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .sunflower-glow {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+@media (max-width: 480px) {
+  .sunflower-container {
+    width: 250px;
+    height: 350px;
+  }
+  
+  .petals {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .petal {
+    width: 14px;
+    height: 28px;
+  }
+  
+  .flower-center {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .sunflower-glow {
+    width: 120px;
+    height: 120px;
+  }
+}
